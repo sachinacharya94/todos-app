@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from 'react-modal'
 import { Axios } from '../../../api/server';
+import { toast } from 'react-toastify'
+
 
 
 
@@ -28,8 +30,9 @@ const  EditModal = ({modalIsOpen, setIsOpen, item}) => {
         try {
             await Axios.delete(`todos/${item.id}`)
             setIsOpen(false)
+            toast.success(`${item.title} is deleted!`)
         } catch (error) {
-            
+            toast.error("Todo is not deleted!!")
         }
     }
 

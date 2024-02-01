@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Axios } from '../../../api/server';
-// import raw from "../../../src/rawdata";
 import Todo from './Todo'
+import { toast } from 'react-toastify'
+
 
 const TodoList = ({setReload, reload}) => {
   const [data, setData] = useState([]);
@@ -30,7 +31,8 @@ const TodoList = ({setReload, reload}) => {
       setData(res.data.reverse());
         setReload((prev)=>!prev)
     } catch (error) {
-      console.log(error,"Error detected")
+      toast.error("Error on fetching all todos!")
+      
 
     }
   }

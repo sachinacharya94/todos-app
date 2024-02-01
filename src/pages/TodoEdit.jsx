@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Axios } from "../../api/server";
+import { toast } from 'react-toastify'
+
 
 const TodoEdit = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const TodoEdit = () => {
         setData(res.data.title)
         
     } catch (error) {
-        console.log(error,"error")
+        toast.error("Error loading todos!")
     }
 
   }
@@ -30,9 +32,9 @@ const TodoEdit = () => {
     try {
         await Axios.patch(`todos/${id}`,{title: data})
         goBack();
-        
+        toast.success("Todo edited successfully");
     } catch (error) {
-        console.log(error,'error')
+        toast.error("Failed to edit todo!")
         
     }
 

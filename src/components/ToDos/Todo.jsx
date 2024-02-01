@@ -4,6 +4,8 @@ import EditModal from "../EditModal";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Axios } from "../../../api/server";
+import { toast } from 'react-toastify'
+
 
 
 
@@ -30,8 +32,9 @@ const Todo = ({item, setReload}) => {
     try {
       await Axios.patch(`todos/${item.id}`, data)
       setReload((prev)=>!prev)
+      toast.success("Toggle completed Successfully!!")
     } catch (error) {
-      
+      toast.error("Toggle is not completed !!")
     }
   } 
 

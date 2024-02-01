@@ -2,6 +2,7 @@ import React, {  useState } from 'react'
 import TextInput from '../TextInput'
 import TodoButton from '../TodoButton'
 import { Axios } from '../../../api/server'
+import { toast } from 'react-toastify'
 
 const ToDoInput = ({setReload}) => {
     const [todoInput, setTodoInput]= useState("")
@@ -12,11 +13,16 @@ const ToDoInput = ({setReload}) => {
 
     const AddTodo = async()=>{
         try {
-          await Axios.post("todos", {title:todoInput})
+         const res= await Axios.post("todos", {title:todoInput})
           setTodoInput("")
           setReload(prev=>!prev);
+          // console.log(res,'response')
+          if(res.status==201){
+            toast.success("Todo added successfully!")
+          }
+
         } catch (error) {
-          console.log(error, "Error faced on sendtodo")
+          toast.error(error.message);
         }
         
 
