@@ -1,14 +1,15 @@
-import React, {  useState } from 'react'
+import React, {  useContext, useState } from 'react'
 import TextInput from '../TextInput'
 import TodoButton from '../TodoButton'
 import { Axios } from '../../../api/server'
 import { toast } from 'react-toastify'
+import { ReloadContext } from '../../pages/TodoPages'
 
-const ToDoInput = ({setReload}) => {
+const ToDoInput = () => {
     const [todoInput, setTodoInput]= useState("")
     
 
-
+    const {setReload} = useContext(ReloadContext)
     
 
     const AddTodo = async()=>{

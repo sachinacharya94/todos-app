@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Axios } from '../../../api/server';
 import Todo from './Todo'
 import { toast } from 'react-toastify'
+import { ReloadContext } from '../../pages/TodoPages';
+import useAxiosCall from '../../hooks/useAxiosCall';
 
 
-const TodoList = ({setReload, reload}) => {
+const TodoList = () => {
   const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    getAllTodos();
-  },[reload])
+  const {reload} = useContext(ReloadContext)
+  // useEffect(()=>{
+  //   getAllTodos();
+  // },[reload])
 
-  
+const todo = useAxiosCall("todos",reload);
 
   // const getTodos =async ()=>{
   //   try {
@@ -25,26 +28,26 @@ const TodoList = ({setReload, reload}) => {
   // }
 
 
-  const getAllTodos = async ()=>{
-    try {
-      const res =await Axios.get("todos");
-      setData(res.data.reverse());
-        setReload((prev)=>!prev)
-    } catch (error) {
-      toast.error("Error on fetching all todos!")
+  // const getAllTodos = async ()=>{
+  //   try {
+  //     const res =await Axios.get("todos");
+  //     setData(res.data.reverse());
+  //       setReload((prev)=>!prev)
+  //   } catch (error) {
+  //     toast.error("Error on fetching all todos!")
       
 
-    }
-  }
+  //   }
+  // }
       
   
   // console.log(raw,"raw Data")
   return (
     <div className='flex flex-col gap-3'>
         {
-          data?.map((item)=>{
+          todo?.map((item)=>{
 
-             return <Todo setReload={setReload} item={item}  />
+             return <Todo  item={item}  />
           })
         }
 

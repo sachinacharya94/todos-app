@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Modal from 'react-modal'
 import { Axios } from '../../../api/server';
 import { toast } from 'react-toastify'
+import { ReloadContext } from '../../pages/TodoPages';
 
 
 
@@ -21,6 +22,8 @@ const customStyles = {
 const  EditModal = ({modalIsOpen, setIsOpen, item}) => {
 
 
+  const {setReload} = useContext(ReloadContext)
+
     function closeModal(){
         setIsOpen(false);
     }
@@ -31,6 +34,7 @@ const  EditModal = ({modalIsOpen, setIsOpen, item}) => {
             await Axios.delete(`todos/${item.id}`)
             setIsOpen(false)
             toast.success(`${item.title} is deleted!`)
+            setReload(prev=>!prev)
         } catch (error) {
             toast.error("Todo is not deleted!!")
         }

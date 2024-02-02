@@ -2,7 +2,7 @@ import React from 'react'
 import TodoButton from '../TodoButton'
 import TodoList from './TodoList'
 
-const TodoContainer = ({setReload, reload}) => {
+const TodoContainer = () => {
   return (
     <div className='mt-8 flex flex-col gap-4 mb-[60px]'>
       <h1 className='text-center text-2xl font-medium'>To do List</h1>
@@ -11,7 +11,7 @@ const TodoContainer = ({setReload, reload}) => {
         <TodoButton onClick={()=>{}} text ={"Done"}/>
         <TodoButton onClick={()=>{}} text ={"ToDo"}/>
       </div>
-      <TodoList setReload={setReload} reload={reload}/>
+      <TodoList />
 
     </div>
   )

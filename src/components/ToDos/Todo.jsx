@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import EditModal from "../EditModal";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Axios } from "../../../api/server";
 import { toast } from 'react-toastify'
+import { ReloadContext } from "../../pages/TodoPages";
 
 
 
 
-const Todo = ({item, setReload}) => {
+const Todo = ({item}) => {
   const [modalIsOpen, setIsOpen] = useState(false);
   // const [completed, setCompleted] = useState(false);
   const navigate =useNavigate();
+
+  const {setReload} = useContext(ReloadContext)
+
 
   // console.log(props,"props");
 
