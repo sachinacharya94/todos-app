@@ -6,15 +6,15 @@ import { ReloadContext } from '../../pages/TodoPages';
 import useAxiosCall from '../../hooks/useAxiosCall';
 
 
-const TodoList = () => {
-  const [data, setData] = useState([]);
+const TodoList = ({todo, filteredData}) => {
+  // const [data, setData] = useState([]);
 
   const {reload} = useContext(ReloadContext)
   // useEffect(()=>{
   //   getAllTodos();
   // },[reload])
 
-const todo = useAxiosCall("todos",reload);
+// const todo = useAxiosCall("todos",reload);
 
   // const getTodos =async ()=>{
   //   try {
@@ -45,10 +45,15 @@ const todo = useAxiosCall("todos",reload);
   return (
     <div className='flex flex-col gap-3'>
         {
-          todo?.map((item)=>{
+          filteredData.length>0? (filteredData?.map((item)=>{
 
-             return <Todo  item={item}  />
-          })
+            return <Todo  item={item}  />
+          }))
+          :(todo?.map((item)=>{
+
+            return <Todo  item={item}  />
+          }))
+          
         }
 
     </div>
